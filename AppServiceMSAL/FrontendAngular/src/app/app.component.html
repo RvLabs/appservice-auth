@@ -1,0 +1,13 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>Demo App</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button routerLink="/">Home</a>
+      <a mat-button routerLink="/profiles">Profiles</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet *ngIf="!isIframe"></router-outlet>
