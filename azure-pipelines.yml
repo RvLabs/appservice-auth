@@ -26,9 +26,8 @@ steps:
     command: 'install'
     workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/BackendNodejs'
 
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   displayName: 'Publish BackendAPI artifact'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/AppServiceEasyAuth/BackendNodejs'
-    ArtifactName: 'backendapi'
-    publishLocation: 'Container'
+    targetPath: '$(Build.SourcesDirectory)/AppServiceEasyAuth/BackendNodejs'
+    artifact: 'backapi'
