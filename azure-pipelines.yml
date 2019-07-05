@@ -4,16 +4,24 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+- ea-frontsrv
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
+- task: Npm@1
+  displayName: 'Frontend Server app install'
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendNodejs'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifact for Frontend Server app'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendNodejs'
+    ArtifactName: 'frontsrv'
+    publishLocation: 'Container'
 
 #- script: |
 #    npm install
