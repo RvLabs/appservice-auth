@@ -4,18 +4,28 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+- ea-frontapp
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
+- task: Npm@1
+  displayName: 'NPM Install Frontend App'
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
 
-#- script: |
-#    npm install
-#    npm run build
-#  displayName: 'npm install and build'
+- task: Npm@1
+  displayName: 'Angular NG build'
+  inputs:
+    command: 'custom'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
+    customCommand: 'run build'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish NG dist artifact'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular/dist'
+    ArtifactName: 'frontapp'
+    publishLocation: 'Container'
