@@ -10,12 +10,25 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+#- task: NodeTool@0
+#  inputs:
+#    versionSpec: '10.x'
+#  displayName: 'Install Node.js'
 
 #- script: |
 #    npm install
 #    npm run build
 #  displayName: 'npm install and build'
+
+- task: Npm@1
+  displayName: 'BackendNodejs install'
+  inputs:
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/BackendNodejs'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish BackendAPI artifact'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/AppServiceEasyAuth/BackendNodejs'
+    ArtifactName: 'backendapi'
+    publishLocation: 'Container'
