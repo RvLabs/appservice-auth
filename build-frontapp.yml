@@ -26,5 +26,5 @@ steps:
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Frontapp artifact'
   inputs:
-    targetPath: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
+    targetPath: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular/dist'
     artifact: 'frontapp'
