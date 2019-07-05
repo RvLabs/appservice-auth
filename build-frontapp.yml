@@ -23,9 +23,8 @@ steps:
     workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
     customCommand: 'run build'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish NG dist artifact'
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Frontapp artifact'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular/dist'
-    ArtifactName: 'frontapp'
-    publishLocation: 'Container'
+    targetPath: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
+    artifact: 'frontapp'
