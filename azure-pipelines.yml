@@ -5,6 +5,7 @@
 
 trigger:
 - ea-frontsrv
+- ea-frontapp
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -21,6 +22,26 @@ steps:
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendNodejs'
     ArtifactName: 'frontsrv'
+    publishLocation: 'Container'
+
+- task: Npm@1
+  displayName: 'NPM Install Frontend App'
+  inputs:
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
+
+- task: Npm@1
+  displayName: 'Angular NG build'
+  inputs:
+    command: 'custom'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
+    customCommand: 'run build'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish NG dist artifact'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular/dist'
+    ArtifactName: 'frontapp'
     publishLocation: 'Container'
 
 #- script: |
