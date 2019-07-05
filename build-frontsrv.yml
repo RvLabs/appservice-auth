@@ -17,7 +17,7 @@ steps:
     workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendNodejs'
 
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish BackendAPI artifact'
+  displayName: 'Publish Frontend server app artifact'
   inputs:
     targetPath: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendNodejs'
     artifact: 'frontsrv'
