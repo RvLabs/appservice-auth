@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var app = express();
 
-const _app_folder = './frontend/dist/frontend';
+const _app_folder = '../frontend';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
