@@ -15,7 +15,7 @@ export class ProfileDataService {
   constructor(private http: HttpClient) { }
 
   getProfiles(token): Observable<any> {
-    return this.http.get(environment.backend.url, {headers: {'Authorization': 'Bearer ' + token}, observe: 'response'});
+    return this.http.get(environment.apps.backend.url, {headers: {'Authorization': 'Bearer ' + token}, observe: 'response'});
   }
 
 }
