@@ -1,0 +1,30 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- ea-frontapp
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Npm@1
+  displayName: 'NPM Install Frontend App'
+  inputs:
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
+
+- task: Npm@1
+  displayName: 'Angular NG build'
+  inputs:
+    command: 'custom'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular'
+    customCommand: 'run build'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Frontapp artifact'
+  inputs:
+    targetPath: '$(Build.SourcesDirectory)/AppServiceEasyAuth/FrontendAngular/dist'
+    artifact: 'frontapp'
