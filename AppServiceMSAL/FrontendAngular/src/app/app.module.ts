@@ -19,8 +19,8 @@ export function loggerCallback(logLevel, message, piiEnabled) {
 }
 
 export const protectedResourceMap:[string, string[]][]=[ 
-  [environment.frontend.scope.endpoint,[environment.frontend.scope.consent]],
-  [environment.backend.scope.endpoint, [environment.backend.scope.consent]]
+  [environment.apps.frontend.scope.endpoint,[environment.apps.frontend.scope.consent]],
+  [environment.apps.backend.url, [environment.apps.backend.scope.consent]]
 ];
 
 
@@ -40,7 +40,7 @@ export const protectedResourceMap:[string, string[]][]=[
     MsalModule.forRoot ({
       clientID: environment.aad.clientID,
       authority: environment.aad.authority,
-      consentScopes: [ environment.frontend.scope.consent, environment.backend.scope.consent ],
+      consentScopes: [ environment.apps.frontend.scope.consent, environment.apps.backend.scope.consent ],
       protectedResourceMap: protectedResourceMap,
       logger: loggerCallback,
       level: LogLevel.Verbose,
