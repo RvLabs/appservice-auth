@@ -1,0 +1,23 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- ea-backapi
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Npm@1
+  displayName: 'BackendNodejs install'
+  inputs:
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)/AppServiceEasyAuth/BackendNodejs'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish BackendAPI artifact'
+  inputs:
+    targetPath: '$(Build.SourcesDirectory)/AppServiceEasyAuth/BackendNodejs'
+    artifact: 'backapi'

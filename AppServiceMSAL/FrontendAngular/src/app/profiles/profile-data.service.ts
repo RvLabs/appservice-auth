@@ -14,8 +14,14 @@ export class ProfileDataService {
 
   constructor(private http: HttpClient) { }
 
+  /*
+    Ideally, we would use HTTP interceptors to add the headers below to all API calls.
+    MSAL for angular should add the access token to the request header automatically, this is for experimentation
+  */
   getProfiles(token): Observable<any> {
-    return this.http.get(environment.apps.backend.url, {headers: {'Authorization': 'Bearer ' + token}, observe: 'response'});
+    return this.http.get(environment.apps.backend.url, 
+                          {headers: {'Authorization': 'Bearer ' + token, 'X-ZUMO-AUTH': token}, 
+                          observe: 'response'});
   }
 
 }

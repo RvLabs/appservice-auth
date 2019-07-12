@@ -30,10 +30,11 @@ export class AppComponent implements OnInit {
 
   login()
   {
+    // Consents to be requested during login 
     this.authService.loginRedirect([
       //environment.graph.scope.consent, 
-      environment.frontend.scope.consent,
-      environment.backend.scope.consent
+      environment.apps.frontend.scope.consent,
+      environment.apps.backend.scope.consent
     ]);
   }
 

@@ -18,9 +18,13 @@ export function loggerCallback(logLevel, message, piiEnabled) {
   console.log(message);
 }
 
+/*
+  List and map our resources to their scopes
+  EX: [https://my-api.site.com/api/getitems, [app://<appID>/api.read, app://<appID>>/api.edit]]
+*/
 export const protectedResourceMap:[string, string[]][]=[ 
-  [environment.frontend.scope.endpoint,[environment.frontend.scope.consent]],
-  [environment.backend.scope.endpoint, [environment.backend.scope.consent]]
+  [environment.apps.frontend.scope.endpoint,[environment.apps.frontend.scope.consent]],
+  [environment.apps.backend.url, [environment.apps.backend.scope.consent]]
 ];
 
 
@@ -37,10 +41,10 @@ export const protectedResourceMap:[string, string[]][]=[
     MatCardModule,
     MatGridListModule,
     HttpClientModule,
-    MsalModule.forRoot ({
+    MsalModule.forRoot ({       // Configure MSAL module to use our AAD, consent, and protected resources
       clientID: environment.aad.clientID,
       authority: environment.aad.authority,
-      consentScopes: [ environment.frontend.scope.consent, environment.backend.scope.consent ],
+      consentScopes: [ environment.apps.frontend.scope.consent, environment.apps.backend.scope.consent ],
       protectedResourceMap: protectedResourceMap,
       logger: loggerCallback,
       level: LogLevel.Verbose,
@@ -50,7 +54,7 @@ export const protectedResourceMap:[string, string[]][]=[
   providers: [
     ProfileDataService,
     {
-      provide: HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS,   // MSAL HTTP interceptor
       useClass: MsalInterceptor,
       multi: true
     }

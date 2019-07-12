@@ -15,7 +15,7 @@ export class ProfileDataService {
   constructor(private http: HttpClient) { }
 
   getProfiles(token): Observable<any> {
-    return this.http.get('https://allmat-backend-api.azurewebsites.net/api/profiles', {headers: { 'Authorization': 'Bearer ' + token}, observe: 'response'});
+    return this.http.get('https://ea-backapi.azurewebsites.net/api/profiles', {headers: { 'Authorization': 'Bearer ' + token}, observe: 'response'});
   }
 
   getMe(): Observable<any> {
