@@ -3,8 +3,9 @@ var router = express.Router();
 var fs = require('fs');
 
 /* GET home page. */
-router.get('/api/profiles', function(req, res, next) {
-  fs.readFile('../profiles.json', (err, jsonData) => {
+router.get('/api/test', function(req, res, next) {
+  console.log('Headers: ' + JSON.stringify(req.headers));
+  fs.readFile('../BackendNodejs/profiles.json', (err, jsonData) => {
     if (err) {
       console.log("Error reading file: ", err)
       return
@@ -12,7 +13,6 @@ router.get('/api/profiles', function(req, res, next) {
     
     jsonProfiles = JSON.parse(jsonData);
 
-    res.header("Access-Control-Allow-Origin", "*");
     res.send(jsonProfiles);
 
   })
