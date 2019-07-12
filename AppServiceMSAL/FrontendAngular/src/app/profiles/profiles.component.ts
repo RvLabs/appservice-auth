@@ -18,7 +18,7 @@ export class ProfilesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.msalService.acquireTokenSilent([environment.backend.scope.consent]).then( (tok) => { 
+    this.msalService.acquireTokenSilent([environment.apps.backend.scope.consent]).then( (tok) => { 
         console.log("rb-token: " + tok);
         this.getProfiles(tok);
       }, (error) => {
