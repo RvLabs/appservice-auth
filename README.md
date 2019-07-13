@@ -6,10 +6,10 @@
 The backapi is a simple NodeJS application that reads a local json file to return a set of profile data to a client.
 
 #### Deploy the backend API
-For this smple to work, deploy `AppServiceEasyAuth/BackendNodejs/` to an App Service. Alternatively, you can deploy your own code for the backend API.
+For this sample to work, deploy `AppServiceEasyAuth/BackendNodejs/` to an App Service. Alternatively, you can deploy your own code for the backend API.
 
 #### Configure Authentication / Authorization for your backend API
-To secure your backend API app deployed in App Service, simply enable EasyAuth. From the App Serivce blade, under the **Setting** section, click **Authentication / Authorization**. Then set the following:
+To secure your backend API app deployed in App Service, simply enable EasyAuth. From the App Service blade, under the **Setting** section, click **Authentication / Authorization**. Then set the following:
 * App Service Authentication to **On**.
 * Action to take when request is not authenticated to **Login with Azure Active Directory**.
 * Authentication Providers, configure **Azure Active Directory**. 
@@ -26,8 +26,8 @@ This sample assumes the Angular app (Frontapp) is in the `frontend\dist\frontend
 
 You can verify the app is working correctly by navigating to its URL before configuring EasyAuth.
 
-#### Configure Authenticaton / Authorization for your frontend APP
-This comfiguration is exactly the same as for the backend API, however, make sure to specify a new unique name when you set the Management mode to **Express**. 
+#### Configure Authentication / Authorization for your frontend APP
+This configuration is exactly the same as for the backend API, however, make sure to specify a new unique name when you set the Management mode to **Express**. 
 
 #### AAD App Registration API permissions
 We now need to ensure that the frontend app registration has access to the backend app registration. To do this, from the Azure portal, launch Azure Active Directory. From its blade, under the **General** section click on **App Registration** and find your App (which was automatically created by App Service when enabling EasyAuth). 
@@ -50,7 +50,7 @@ For your frontend app, which runs and executes client side, to access the token 
 * [Accessing and refreshing token from EasyAuth's token store](https://docs.microsoft.com/en-us/azure/app-service/app-service-authentication-how-to#retrieve-tokens-in-app-code)
 
 
-## App Service fronend secured with MSAL with secure calls to App Service backend API using PassportJS
+## App Service frontend secured with MSAL with secure calls to App Service backend API using PassportJS
 
 The important part to remember it's that: MSAL JS is client side only and that for a NodeJS backend API a third-party library needs to be used at this time. We are using [Passport-Azure-AD](http://www.passportjs.org/packages/passport-azure-ad/)
 
@@ -108,14 +108,14 @@ This service calls our backend API and append the `access_token` in the Authoriz
   }
 ```
 
-### Backend API with Passpor.js
-Our backend api app is being protected from unauthorized access using **Passport-Azure-AD** with the **Bearer Strategy**. All the backend app will do, it's verify the token it has recieved.
+### Backend API with Passport.js
+Our backend api app is being protected from unauthorized access using **Passport-Azure-AD** with the **Bearer Strategy**. All the backend app will do, it's verify the token it has received.
 
 #### Configure Passport-Azure-AD
 [Passport-Azure-Add documentation](http://www.passportjs.org/packages/passport-azure-ad/)
 
 #### Protect app routes
-The library will automatically obtain the `Authenticatoin` header from the request and verify the token attached.
+The library will automatically obtain the `Authentication` header from the request and verify the token attached.
 ```
 app.get('/api/profiles', passport.authenticate('oauth-bearer', { session: false }), function(req, res, next) {
     console.log('Headers are: ' + JSON.stringify(req.headers));
