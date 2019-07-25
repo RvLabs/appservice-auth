@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private ProfileDataService: ProfileDataService) { };
 
   userData$: Observable<any>;
+  tokRefresh$: Observable<any>;
 
   ngOnInit() {
 
@@ -20,5 +21,13 @@ export class AppComponent implements OnInit {
     this.userData$.subscribe( res => {
       console.log(res);
     });
+  }
+
+  tokenRefresh() {
+    this.tokRefresh$ = this.ProfileDataService.getRefresh();
+    this.tokRefresh$.subscribe( res => {
+      console.log("REFRESH: " = res );
+    })
+
   }
 }
