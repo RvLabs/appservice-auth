@@ -26,4 +26,3 @@ export class ProfileDataService {
     return this.http.get('/.auth/refresh', {observe: 'response'});
   }
 }
-}
