@@ -21,4 +21,9 @@ export class ProfileDataService {
   getMe(): Observable<any> {
     return this.http.get('/.auth/me', {observe: 'response'});
   }
+
+  getRefresh(): Observable<any> {
+    return this.http.get('/.auth/refresh', {observe: 'response'});
+  }
+}
 }
