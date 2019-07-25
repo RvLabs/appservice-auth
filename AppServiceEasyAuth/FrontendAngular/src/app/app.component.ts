@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   tokenRefresh() {
     this.tokRefresh$ = this.ProfileDataService.getRefresh();
     this.tokRefresh$.subscribe( res => {
-      console.log("REFRESH: " = res );
+      console.log("REFRESH: " + res );
     })
 
   }
