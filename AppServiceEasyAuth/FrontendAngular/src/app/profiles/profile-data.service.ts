@@ -27,6 +27,6 @@ export class ProfileDataService {
   }
 
   logOut(): Observable<any> {
-    return this.http.get('/.auth/logout?post_logout_redirect_uri=/index.html', {observe: 'response'});
+    return this.http.get('/.auth/logout?post_logout_redirect_uri=/', {observe: 'response'});
   }
 }
