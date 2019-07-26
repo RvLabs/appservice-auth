@@ -25,4 +25,8 @@ export class ProfileDataService {
   getRefresh(): Observable<any> {
     return this.http.get('/.auth/refresh', {observe: 'response'});
   }
+
+  logOut(): Observable<any> {
+    return this.http.get('/.auth/logout', {observe: 'response'});
+  }
 }

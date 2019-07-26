@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   userData$: Observable<any>;
   tokRefresh$: Observable<any>;
+  logout$: Observable<any>;
 
   ngOnInit() {
 
@@ -27,6 +28,14 @@ export class AppComponent implements OnInit {
     this.tokRefresh$ = this.ProfileDataService.getRefresh();
     this.tokRefresh$.subscribe( res => {
       console.log("REFRESH: " + res );
+    })
+
+  }
+  
+  userLogout() {
+    this.logout$ = this.ProfileDataService.logOut();
+    this.logout$.subscribe( res => {
+      console.log("logout: " + res );
     })
 
   }
