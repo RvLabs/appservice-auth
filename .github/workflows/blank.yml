@@ -17,6 +17,10 @@ jobs:
         echo test, and deploy your project.
     - name: Bash for GitHub Actions
       uses: jcblw/bash@1.0.0
-        echo "Testing bash action"
-        pwd.
+      run: action "Setup" {
+        uses = "jdickey/bash@master"
+        args = ["echo HELLO Romer"]
+      }
+        
+        
     
